@@ -2,4 +2,4 @@
 First Web Dev project
 
 
-Wireframe: 
+Wireframe: https://github.com/JohnWeatherford/Alpha-Project/blob/main/docs/images/wireframe.jpeg.
