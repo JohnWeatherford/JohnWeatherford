@@ -8,18 +8,16 @@ So that I can pass this class and come back with a new skill and have a new favo
 
 Wireframe: https://github.com/JohnWeatherford/Alpha-Project/blob/main/docs/images/wireframe.jpeg.
 
-js
-'''
+
+```js
 document.addEventListener("DOMContentLoaded", () => {
   console.log("document succesfully loaded, baby");
 
   document.getElementById('btnClicky').addEventListener('click', btnClicky);
-}
-);
+});
 
 function btnClicky() {
   console.log('in btnClicky event');
-  document.getElementById('btnClicky').style.transform = 'rotate(90deg)'
+  document.getElementById('btnClicky').style.transform = 'rotate(90deg)';
   console.log('after rotation');
 }
-'''
