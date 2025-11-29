@@ -4,14 +4,14 @@
         "date": "2025",
         "description": "Completed Codecademy's HTML & CSS course to learn semantic markup, responsive layouts, and CSS fundamentals. Also used as part of Web Development coursework.",
         "type": "course",
-        "link": "https://www.codecademy.com"
+        "link": "https://www.codecademy.com/profiles/JohnWeatherford"
     },
     {
         "title": "Codecademy: JavaScript Basics",
         "date": "2025",
         "description": "Completed the Codecademy JavaScript Basics track covering variables, control flow, functions, arrays, objects, and basic DOM interaction.",
         "type": "course",
-        "link": "https://www.codecademy.com"
+        "link": "https://www.codecademy.com/profiles/JohnWeatherford"
     },
     {
         "title": "UNA: CIS Program Coursework",
@@ -41,4 +41,5 @@
         "type": "organization",
         "link": "#"
     }
+
 ]
