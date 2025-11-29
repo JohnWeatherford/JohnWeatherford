@@ -4,21 +4,21 @@
         "date": "2024",
         "description": "Completed Codecademy's introduction to HTML and CSS course, including semantic markup, responsive design, and layout basics.",
         "type": "course",
-        "link": "https://www.codecademy.com"
+        "link": "https://www.codecademy.com/profiles/JohnWeatherford"
     },
     {
         "title": "Codecademy: JavaScript Basics",
         "date": "2024",
         "description": "Finished the beginner JavaScript track covering variables, loops, arrays, objects, and basic DOM manipulation.",
         "type": "course",
-        "link": "https://www.codecademy.com"
+        "link": "https://www.codecademy.com/profiles/JohnWeatherford"
     },
     {
         "title": "UNA: CIS Program Coursework",
         "date": "2025",
         "description": "Progress through the University of North Alabama CIS curriculum with a focus on web development, systems analysis, and project-based collaboration.",
         "type": "academic",
-        "link": "https://una.edu"
+        "link": "https//www.una.edu"
     },
     {
         "title": "Accessibility Checks Completed",
@@ -27,4 +27,5 @@
         "type": "skill",
         "link": ""
     }
+
 ]
