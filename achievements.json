@@ -4,14 +4,14 @@
         "date": "2024",
         "description": "Completed Codecademy's introduction to HTML and CSS course, including semantic markup, responsive design, and layout basics.",
         "type": "course",
-        "link": "https://www.codecademy.com"
+        "link": "https://www.codecademy.com/profiles/JohnWeatherford"
     },
     {
         "title": "Codecademy: JavaScript Basics",
         "date": "2024",
         "description": "Finished the beginner JavaScript track covering variables, loops, arrays, objects, and basic DOM manipulation.",
         "type": "course",
-        "link": "https://www.codecademy.com"
+        "link": "https://www.codecademy.com/profiles/JohnWeatherford"
     },
     {
         "title": "UNA: CIS Program Coursework",
@@ -27,4 +27,5 @@
         "type": "skill",
         "link": ""
     }
+
 ]
