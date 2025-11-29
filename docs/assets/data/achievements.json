@@ -18,7 +18,7 @@
         "date": "2025",
         "description": "Progress through the University of North Alabama CIS curriculum with a focus on web development, systems analysis, and project-based collaboration.",
         "type": "academic",
-        "link": "https//www.una.edu"
+        "link": "https://una.edu"
     },
     {
         "title": "Accessibility Checks Completed",
@@ -27,20 +27,18 @@
         "type": "skill",
         "link": ""
     },
-     {
+    {
         "title": "Member of Delta Alpha Pi (DAPi)",
         "date": "2025",
         "description": "Disability Support Honor Society. Treasurer and active member since 2024.",
         "type": "honor",
-        "link": "#"
+        "link": "https://www.una.edu/disability-support/enhanced-services/delta-alpha-pi-honor-society.html"
     },
     {
         "title": "Brother of Lambda Sigma Phi",
         "date": "2022",
         "description": "Joined Lambda Sigma Phi in Fall 2022 and remain an active brother.",
         "type": "organization",
-        "link": "#"
+        "link": "https://www.una.edu/fsl/chapters/lambda-sigma-phi.html"
     }
-
 ]
-
