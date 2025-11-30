@@ -59,4 +59,51 @@ function renderCards(items) {
 
     container.appendChild(card);
   });
+  // Simple script to load projects.json and create Bootstrap cards
+  document.addEventListener('DOMContentLoaded', async () => {
+    const jsonPath = '../assets/data/projects.json'; // correct for pages/
+    const container = document.getElementById('projects-container');
+    if (!container) return;
+
+    try {
+      const res = await fetch(jsonPath);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const projects = await res.json();
+
+      container.innerHTML = ''; // clear
+
+      projects.forEach(p => {
+        const col = document.createElement('div');
+        col.className = 'col-12 col-md-10 offset-md-1';
+
+        col.innerHTML = `
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">${escapeHtml(p.title)}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">${escapeHtml(p.date)}</h6>
+            <p class="card-text">${escapeHtml(p.description)}</p>
+            ${p.image ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.title)} screenshot" class="img-fluid mt-3">` : ''}
+          </div>
+          <div class="card-footer text-end">
+            ${p.live ? `<a class="btn btn-sm btn-primary" href="${escapeHtml(p.live)}" target="_blank" rel="noopener noreferrer">Live</a>` : ''}
+            ${p.code ? `<a class="btn btn-sm btn-outline-primary ms-2" href="${escapeHtml(p.code)}" target="_blank" rel="noopener noreferrer">Code</a>` : ''}
+          </div>
+        </div>
+      `;
+        container.appendChild(col);
+      });
+    } catch (err) {
+      console.error('Failed to load projects.json', err);
+      container.innerHTML = '<div class="col-12"><p class="text-danger">Could not load projects.</p></div>';
+    }
+  });
+
+  function escapeHtml(s = '') {
+    return String(s)
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;');
+  }
 }
