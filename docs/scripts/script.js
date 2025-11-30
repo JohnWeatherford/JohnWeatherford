@@ -1,22 +1,24 @@
-// scripts/script.js - single simple loader for projects + achievements
+/ scripts/script.js - robust, single loader
 document.addEventListener('DOMContentLoaded', () => {
   console.log('script.js running');
 
+  // If your pages folder is named 'pages' this will be true
   const inPages = window.location.pathname.split('/').includes('pages');
   const prefix = inPages ? '../' : '';
 
-  // Decide which file & container to use
+  // decide which file + container
   let jsonFile = null;
   let containerSelector = null;
+  let projectsFlag = false;
   if (window.location.pathname.includes('projects')) {
     jsonFile = prefix + 'assets/data/projects.json';
     containerSelector = '#projects-container';
+    projectsFlag = true;
   } else if (window.location.pathname.includes('achievements')) {
     jsonFile = prefix + 'assets/data/achievements.json';
     containerSelector = '#achievements-container';
   } else {
-    // fallback: don't try to load anything
-    console.log('Not a projects or achievements page. Exiting loader.');
+    console.log('Not a projects or achievements page — nothing to load.');
     return;
   }
 
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(data => {
       if (!Array.isArray(data)) throw new Error('JSON is not an array');
-      renderCards(data, containerSelector, window.location.pathname.includes('projects'));
+      renderCards(data, containerSelector, projectsFlag);
       console.log('Rendered', data.length, 'items');
     })
     .catch(err => {
@@ -38,10 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-/**
- * Render items into container
- * projectsFlag true => render project layout, else achievement layout
- */
 function renderCards(items, containerSelector, projectsFlag = true) {
   const container = document.querySelector(containerSelector) || document.querySelector('.row.g-4');
   if (!container) {
@@ -54,20 +52,16 @@ function renderCards(items, containerSelector, projectsFlag = true) {
     const col = document.createElement('div');
     col.className = 'col-12 col-md-10 offset-md-1';
 
-    // find best link for details/code/live
     const link = firstTruthy(item.links, item.link, item.project, item.code, item.live, '#');
     const live = firstTruthy(item.live, item.game, '');
-    // find image key
     const img = firstTruthy(item.image, item.screenshot, '');
 
     const title = escapeHtml(firstTruthy(item.title, 'Untitled'));
     const date = escapeHtml(firstTruthy(item.date, ''));
     const desc = escapeHtml(firstTruthy(item.description, ''));
 
-    // Build card HTML
     let imgHtml = '';
     if (img && img !== '#') {
-      // preferrably path relative to HTML; leave as-is
       imgHtml = `<img src="${escapeAttr(img)}" alt="${title} screenshot" class="img-fluid mt-3">`;
     }
 
@@ -90,7 +84,6 @@ function renderCards(items, containerSelector, projectsFlag = true) {
         </article>
       `;
     } else {
-      // achievements layout (similar, with badge)
       const type = escapeHtml(item.type || '');
       col.innerHTML = `
         <article class="card h-100 shadow-sm">
@@ -111,14 +104,12 @@ function renderCards(items, containerSelector, projectsFlag = true) {
   });
 }
 
-/* ---------- small helpers ---------- */
 function firstTruthy(...vals) {
   for (const v of vals) {
     if (v !== undefined && v !== null && String(v).trim() !== '') return v;
   }
   return '';
 }
-
 function escapeHtml(unsafe = '') {
   return String(unsafe)
     .replaceAll('&', '&amp;')
@@ -127,8 +118,6 @@ function escapeHtml(unsafe = '') {
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#39;');
 }
-
 function escapeAttr(s = '') {
-  // minimal attr sanitizer: trim and return
   return String(s).trim();
 }
