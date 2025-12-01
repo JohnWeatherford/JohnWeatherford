@@ -58,9 +58,10 @@ function renderItems(items, container, isProjects = false) {
     const date = safeText(firstTruthy(item.date, ''));
     const desc = safeText(firstTruthy(item.description, ''));
     const img = firstTruthy(item.image, item.screenshot, '');
+    // *** REPLACED HERE per your request (use item variable) ***
     const live = firstTruthy(item.game, item.live, '');
-    // accept both "link" and "links" as code/source URL
-    const code = firstTruthy(item.links, item.link, item.project, item.code, '');
+    const code = firstTruthy(item.links, item.project, item.code, '');
+    // end replacement
 
     const imgHtml = img && img !== '#' ? `<img src="${escapeAttr(img)}" alt="${title} screenshot" class="img-fluid mt-3">` : '';
 
