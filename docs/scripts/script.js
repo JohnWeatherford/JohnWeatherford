@@ -1,12 +1,12 @@
-// scripts/script.js - simple loader for projects & achievements
+// scripts/script.js - robust single loader for projects & achievements
 document.addEventListener('DOMContentLoaded', () => {
   console.log('script.js running');
 
-  // detect whether page path includes "pages" (so we know to prefix ../)
+  // detect whether page path contains "pages" to know prefix
   const inPages = window.location.pathname.split('/').includes('pages');
   const prefix = inPages ? '../' : '';
 
-  // choose which file & container based on filename
+  // pick JSON file and container by page
   const path = window.location.pathname.toLowerCase();
   let jsonFile = null;
   let containerId = null;
@@ -53,13 +53,14 @@ function renderItems(items, container, isProjects = false) {
     const col = document.createElement('div');
     col.className = 'col-12 col-md-10 offset-md-1';
 
-    // normalize potential fields
+    // normalize potential fields (now includes 'link' for achievements)
     const title = safeText(firstTruthy(item.title, 'Untitled'));
     const date = safeText(firstTruthy(item.date, ''));
     const desc = safeText(firstTruthy(item.description, ''));
     const img = firstTruthy(item.image, item.screenshot, '');
     const live = firstTruthy(item.game, item.live, '');
-    const code = firstTruthy(item.links, item.project, item.code, '');
+    // accept both "link" and "links" as code/source URL
+    const code = firstTruthy(item.links, item.link, item.project, item.code, '');
 
     const imgHtml = img && img !== '#' ? `<img src="${escapeAttr(img)}" alt="${title} screenshot" class="img-fluid mt-3">` : '';
 
