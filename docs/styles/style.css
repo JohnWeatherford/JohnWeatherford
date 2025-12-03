@@ -1,8 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+MX+Guides&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+
+:root {
+  --border: #ffa500;
+  /* orange border */
+  --chip-bg: #fff3e0;
+  /* light orange background */
+  --text: #d96a00;
+  /* darker orange text */
+}
+
+
 h1 {
   font-family: "Roboto", sans-serif;
-  color: orange
+  color: orange;
 }
 
 .project_main,
@@ -12,6 +23,7 @@ h1 {
   font-family: "Roboto", sans-serif;
   color: orange;
 }
+
 
 .chip {
   display: inline-block;

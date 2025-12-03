@@ -1,66 +1,129 @@
-// scripts/script.js - simple loader for projects.json
+/// /scripts/script.js - safer loader for projects.json
 document.addEventListener('DOMContentLoaded', () => {
-  const inPages = window.location.pathname.split('/').includes('pages');
-  const prefix = inPages ? '../' : '';
-  const jsonPath = prefix + 'assets/data/projects.json';
+  (async function loadProjects() {
+    try {
+      const inPages = window.location.pathname.split('/').includes('pages');
+      const prefix = inPages ? '../' : '';
+      const jsonPath = prefix + 'assets/data/projects.json';
 
-  const container = document.getElementById('projects-container') || document.querySelector('.row.g-4');
-  if (!container) {
-    console.warn('No projects container found (#projects-container or .row.g-4)');
-    return;
-  }
+      const container = document.getElementById('projects-container') || document.querySelector('.row.g-4');
+      if (!container) {
+        console.warn('No projects container found (#projects-container or .row.g-4)');
+        return;
+      }
 
-  fetch(jsonPath)
-    .then(r => {
-      if (!r.ok) throw new Error(`Failed to fetch ${jsonPath}: ${r.status}`);
-      return r.json();
-    })
-    .then(data => {
+      const resp = await fetch(jsonPath);
+      if (!resp.ok) throw new Error(`Failed to fetch ${jsonPath}: ${resp.status} ${resp.statusText}`);
+      const data = await resp.json();
+
       if (!Array.isArray(data)) throw new Error('projects.json must be an array');
+
+      // clear existing content
       container.innerHTML = '';
+
       data.forEach(p => {
-        const title = safeText(p.title || 'Untitled');
-        const date = safeText(p.date || '');
-        const desc = safeText(p.description || '');
+        const title = safeText(p.title ?? 'Untitled');
+        const date = safeText(p.date ?? '');
+        const desc = safeText(p.description ?? '');
         const img = firstTruthy(p.image, p.screenshot, '');
         const live = firstTruthy(p.game, p.live, '');
         const code = firstTruthy(p.links, p.project, p.code, '');
 
-        const imgHtml = img && img !== '#' ? `<img src="${escapeAttr(img)}" alt="${title} screenshot" class="img-fluid mt-3">` : '';
-
-        const liveBtn = live ? `<a class="btn btn-sm btn-primary" href="${escapeAttr(live)}" target="_blank" rel="noopener noreferrer">Live</a>` : '';
-        const codeBtn = code ? `<a class="btn btn-sm btn-outline-primary ms-2" href="${escapeAttr(code)}" target="_blank" rel="noopener noreferrer">Code</a>` : `<button class="btn btn-sm btn-primary" disabled>Details</button>`;
-
+        // col wrapper
         const col = document.createElement('div');
         col.className = 'col-12 col-md-10 offset-md-1';
-        col.innerHTML = `
-          <article class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">${title}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">${date}</h6>
-              <p class="card-text">${desc}</p>
-              ${imgHtml}
-            </div>
-            <div class="card-footer text-end">
-              ${liveBtn}
-              ${codeBtn}
-            </div>
-          </article>
-        `;
+
+        // card
+        const card = document.createElement('article');
+        card.className = 'card h-100 shadow-sm';
+
+        // card body
+        const body = document.createElement('div');
+        body.className = 'card-body';
+
+        const h5 = document.createElement('h5');
+        h5.className = 'card-title';
+        h5.textContent = title;
+
+        const h6 = document.createElement('h6');
+        h6.className = 'card-subtitle mb-2 text-muted';
+        h6.textContent = date;
+
+        const pEl = document.createElement('p');
+        pEl.className = 'card-text';
+        pEl.textContent = desc;
+
+        body.appendChild(h5);
+        body.appendChild(h6);
+        body.appendChild(pEl);
+
+        if (img && String(img).trim() !== '#') {
+          const imgEl = document.createElement('img');
+          imgEl.className = 'img-fluid mt-3';
+          imgEl.setAttribute('alt', `${title} screenshot`);
+          imgEl.setAttribute('src', String(img).trim());
+          body.appendChild(imgEl);
+        }
+
+        // footer with buttons
+        const footer = document.createElement('div');
+        footer.className = 'card-footer text-end';
+
+        if (live) {
+          const aLive = document.createElement('a');
+          aLive.className = 'btn btn-sm btn-primary';
+          aLive.setAttribute('href', String(live).trim());
+          aLive.setAttribute('target', '_blank');
+          aLive.setAttribute('rel', 'noopener noreferrer');
+          aLive.textContent = 'Live';
+          footer.appendChild(aLive);
+        }
+
+        if (code) {
+          const aCode = document.createElement('a');
+          aCode.className = 'btn btn-sm btn-outline-primary ms-2';
+          aCode.setAttribute('href', String(code).trim());
+          aCode.setAttribute('target', '_blank');
+          aCode.setAttribute('rel', 'noopener noreferrer');
+          aCode.textContent = 'Code';
+          footer.appendChild(aCode);
+        }
+
+        if (!live && !code) {
+          const btn = document.createElement('button');
+          btn.className = 'btn btn-sm btn-primary';
+          btn.setAttribute('disabled', 'disabled');
+          btn.textContent = 'Details';
+          footer.appendChild(btn);
+        }
+
+        card.appendChild(body);
+        card.appendChild(footer);
+        col.appendChild(card);
         container.appendChild(col);
       });
-    })
-    .catch(err => {
+    } catch (err) {
       console.error(err);
-      container.innerHTML = '<div class="col-12"><p class="text-danger">Could not load data.</p></div>';
-    });
+      const container = document.getElementById('projects-container') || document.querySelector('.row.g-4');
+      if (container) {
+        container.innerHTML = '<div class="col-12"><p class="text-danger">Could not load data.</p></div>';
+      }
+    }
+  })();
 });
 
+// helper: return first non-empty, not '#' string
 function firstTruthy(...vals) {
   for (const v of vals) {
-    if (v !== undefined && v !== null && String(v).trim() !== '' && String(v).trim() !== '#') return v;
+    if (v !== undefined && v !== null) {
+      const s = String(v).trim();
+      if (s !== '' && s !== '#') return s;
+    }
   }
   return '';
 }
-function safeText(s = '') { return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;'); }
-function escapeAttr(s = '') { return String(s).trim(); }
+
+// sanitize plain text for display (keeps it safe when using textContent)
+function safeText(s = '') {
+  return String(s);
+}
