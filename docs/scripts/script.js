@@ -1,12 +1,12 @@
-// scripts/script.js - loader for projects.json & achievements.json
+// scripts/script.js - simple loader for projects & achievements
 document.addEventListener('DOMContentLoaded', () => {
   console.log('script.js running');
 
-  // If your pages folder is named 'pages' this will be true
+  // detect whether page path includes "pages" (so we know to prefix ../)
   const inPages = window.location.pathname.split('/').includes('pages');
   const prefix = inPages ? '../' : '';
 
-  // pick file & container based on URL
+  // choose which file & container based on filename
   const path = window.location.pathname.toLowerCase();
   let jsonFile = null;
   let containerId = null;
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     jsonFile = prefix + 'assets/data/achievements.json';
     containerId = 'achievements-container';
   } else {
-    console.log('Not a projects or achievements page — nothing to do.');
+    console.log('Not a projects/achievements page — script will not run.');
     return;
   }
 
@@ -49,21 +49,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderItems(items, container, isProjects = false) {
   container.innerHTML = ''; // clear existing
-
-  items.forEach(p => {
+  items.forEach(item => {
     const col = document.createElement('div');
     col.className = 'col-12 col-md-10 offset-md-1';
 
-    // the lines you requested
-    const live = firstTruthy(p.game, p.live, '');
-    const code = firstTruthy(p.links, p.project, p.code, '');
+    // normalize potential fields
+    const title = safeText(firstTruthy(item.title, 'Untitled'));
+    const date = safeText(firstTruthy(item.date, ''));
+    const desc = safeText(firstTruthy(item.description, ''));
+    const img = firstTruthy(item.image, item.screenshot, '');
+    const live = firstTruthy(item.game, item.live, '');
+    const code = firstTruthy(item.links, item.project, item.code, '');
 
-    const title = safeText(firstTruthy(p.title, 'Untitled'));
-    const date = safeText(firstTruthy(p.date, ''));
-    const desc = safeText(firstTruthy(p.description, ''));
-    const img = firstTruthy(p.image, p.screenshot, '');
-
-    const imgHtml = (img && img !== '#') ? `<img src="${escapeAttr(img)}" alt="${title} screenshot" class="img-fluid mt-3">` : '';
+    const imgHtml = img && img !== '#' ? `<img src="${escapeAttr(img)}" alt="${title} screenshot" class="img-fluid mt-3">` : '';
 
     const liveBtn = live ? `<a class="btn btn-sm btn-primary" href="${escapeAttr(live)}" target="_blank" rel="noopener noreferrer">Live</a>` : '';
     const codeBtn = code ? `<a class="btn btn-sm btn-outline-primary ms-2" href="${escapeAttr(code)}" target="_blank" rel="noopener noreferrer">Code</a>` : `<button class="btn btn-sm btn-primary" disabled>Details</button>`;
@@ -84,7 +82,7 @@ function renderItems(items, container, isProjects = false) {
         </article>
       `;
     } else {
-      const type = safeText(p.type || '');
+      const type = safeText(item.type || '');
       col.innerHTML = `
         <article class="card h-100 shadow-sm">
           <div class="card-body">
@@ -113,4 +111,6 @@ function firstTruthy(...vals) {
 function safeText(s = '') {
   return String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 }
-function escapeAttr(s = '') { return String(s).trim(); }
+function escapeAttr(s = '') {
+  return String(s).trim();
+}
