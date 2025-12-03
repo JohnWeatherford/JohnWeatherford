@@ -22,7 +22,7 @@
         "links": "https://github.com/JohnWeatherford/vigilant-doodle-bravo",
         "game": "https://johnweatherford.github.io/vigilant-doodle-bravo/",
         "project": "https://github.com/JohnWeatherford/vigilant-doodle-bravo",
-        "screenshot": "images/Screenshot.png"
+        "screenshot": "images/gamescreenshot.png"
     },
     {
         "title": "Project Charlie",
@@ -30,6 +30,14 @@
         "description": "A small collection of games.",
         "game": "https://znasser46.github.io/project-charlie/",
         "project": "https://github.com/znasser46/project-charlie",
-        "screenshot": "images/screenshot.png"
+        "screenshot": "images/project_charile.png"
+    },
+    {
+        "title": "Delta Project",
+        "date": "November 10, 2025",
+        "description": "A web-based prototype for a course registration system that improves upon an existing design by enhancing usability and discoverability of course options through the use of dropdown menus and categorized selections.",
+        "links": "https://github.com/JohnWeatherford/project-delta",
+        "project": "https://johnweatherford.github.io/project-delta/",
+        "screenshot": "images/delta_screenshot.png"
     }
 ]
