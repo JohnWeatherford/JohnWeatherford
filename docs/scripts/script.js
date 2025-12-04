@@ -1,96 +1,55 @@
-document.addEventListener("DOMContentLoaded", () => {
-  console.log("document loaded");
-  document.getElementById('onClick').addEventListener('click', onClick);
-}
-);
+// Load Projects
+fetch("../project.json")
+  .then(res => res.json())
+  .then(projects => {
+    const container = document.getElementById("projectCardSet");
 
-function onClick() {
-  console.log('in onClick event');
-  document.getElementById('onClick').style.transform = 'rotate(15deg)'
-  console.log('after rotation');
-}
+    projects.forEach(p => {
+      const card = document.createElement("div");
+      card.classList.add("projectCards");
 
-// script to pull data from json file and create project cards
-fetch('https://github.com/JohnWeatherford/JohnWeatherford/blob/main/docs/project.json').then(response => response.json())
-  .then(data => {
+      card.innerHTML = `
+        <h2>${p.title}</h2>
+        <p><strong>Date:</strong> ${p.date}</p>
+        <p>${p.description}</p>
+        ${p.screenshot || p.image ? `<img src="${p.screenshot || p.image}" alt="${p.title} screenshot">` : ""}
+        <p>
+          ${p.project ? `<a href="${p.project}" target="_blank">Project Link</a>` : ""}
+          ${p.live ? ` | <a href="${p.live}" target="_blank">Live Demo</a>` : ""}
+          ${p.code ? ` | <a href="${p.code}" target="_blank">Source Code</a>` : ""}
+        </p>
+      `;
 
-    const projectCardSet = document.getElementById('projectCardSet');
-    data.projects.forEach(project => {
-      console.log(project);
-      const card = document.createElement('div');
-      card.className = "projectCards cards";
-      const cardName = document.createElement('h1');
-      cardName.textContent = `${project.name}`;
-      card.appendChild(cardName);
-
-      const projectDesc = document.createElement('h6');
-      projectDesc.className = "projectDesc";
-      projectDesc.textContent = `${project.desc}`;
-      card.appendChild(projectDesc);
-
-
-
-      const projectImg = document.createElement('img');
-      projectImg.className = "projectImg";
-      projectImg.src = `${project.img}`;
-      projectImg.alt = "project image";
-      card.appendChild(projectImg);
-
-      const repoLink = document.createElement('a');
-      repoLink.className = "repoLinks btn btn-secondary btn-sm";
-      repoLink.href = `${project.repo}`;
-      repoLink.textContent = "Repo Link";
-      repoLink.target = "_blank";
-      card.appendChild(repoLink);
-
-      const projectLink = document.createElement('a');
-      projectLink.className = "projectLinks btn btn-secondary btn-sm";
-      projectLink.href = `${project.app}`;
-      projectLink.textContent = "project Link";
-      projectLink.target = "_blank";
-      card.appendChild(projectLink);
-
-      // card.textContent = ` ${project.repo}, ${project.app}, ${project.img}`;
-
-      projectCardSet.appendChild(card);
-
-
+      container.appendChild(card);
     });
-
   })
-  .catch(error => console.error('Error fetching app ideas:', error));
-
-// script to pull data from json file and create achievement cards
-fetch('https://github.com/JohnWeatherford/JohnWeatherford/blob/main/docs/achievements.json').then(response => response.json())
-  .then(data => {
-
-    const achievementCardSet = document.getElementById('achievementCardSet');
-    data.achievements.forEach(achievement => {
+  .catch(err => console.error("Error loading project.json", err));
 
 
+// Load Achievements
+fetch("../achievements.json")
+  .then(res => res.json())
+  .then(achievements => {
+    const container = document.getElementById("achievementCardSet");
 
+    achievements.forEach(a => {
+      const card = document.createElement("div");
+      card.classList.add("achievementCards");
 
-      console.log(achievement);
-      const card = document.createElement('div');
-      card.className = "achievementCards";
+      card.innerHTML = `
+        <h3>${a.title}</h3>
+        <p><strong>${a.date}</strong></p>
+        <p>${a.description}</p>
+        ${a.link ? `<a href="${a.link}" target="_blank">View</a>` : ""}
+      `;
 
-      const trophyIcon = document.createElement("i")
-      trophyIcon.className = "bi bi-trophy-fill trophyIcon";
-      card.appendChild(trophyIcon);
-
-      const cardName = document.createElement('h2');
-      cardName.textContent = `${achievement.name}`;
-      card.appendChild(cardName);
-
-      const achievementDesc = document.createElement('h6');
-      achievementDesc.className = "achievementDesc";
-      achievementDesc.textContent = `${achievement.desc}`;
-      card.appendChild(achievementDesc);
-
-      achievementCardSet.appendChild(card);
-
-
+      container.appendChild(card);
     });
-
   })
-  .catch(error => console.error('Error fetching app ideas:', error));
+  .catch(err => console.error("Error loading achievements.json", err));
+
+
+// Test button
+document.getElementById("onClick").addEventListener("click", () => {
+  alert("Button Works!");
+});
