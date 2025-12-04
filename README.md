@@ -21,3 +21,11 @@ function btnClicky() {
   document.getElementById('btnClicky').style.transform = 'rotate(90deg)';
   console.log('after rotation');
 }
+
+
+used GitHub pages deployed
+GitHub <source>,issues, wiki
+HTML,CSS,JS(BS5), .MD
+BS5 BS icon and noral
+VS code live server TODO and copilot agent claude4.1 and Chatgpt were used Google chrome
+Nu and WAVE were used
