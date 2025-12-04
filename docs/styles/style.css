@@ -2,36 +2,115 @@
 
 
 :root {
-  --border: #ffa500;
-  /* orange border */
-  --chip-bg: #fff3e0;
-  /* light orange background */
-  --text: #d96a00;
-  /* darker orange text */
+  --card-bg: #ffffff;
+  --page-bg: #f3f6f9;
+  --muted: #6b7280;
+  --accent: #0ea5a4;
+  --max-width: 960px;
 }
 
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: var(--page-bg);
+  margin: 0;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: var(--max-width);
+  width: 100%;
+}
 
 h1 {
-  font-family: "Roboto", sans-serif;
-  color: orange;
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
 }
 
-.project_main,
-.blog_main,
-.resource_main {
-  text-align: center;
-  font-family: "Roboto", sans-serif;
-  color: orange;
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
+.card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(20, 20, 20, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 280px;
+}
 
-.chip {
-  display: inline-block;
-  padding: 6px 12px;
-  border-radius: 16px;
-  font-size: 14px;
-  border: 2px solid var(--border);
-  background: var(--chip-bg);
-  cursor: pointer;
-  color: var(--text);
+.card-img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  background: linear-gradient(180deg, #e9eef2, #f6f8fa);
+}
+
+.card-body {
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.title {
+  font-weight: 600;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.desc {
+  font-size: 0.95rem;
+  color: #374151;
+  margin: 0.25rem 0 0 0;
+  flex: 1 1 auto;
+}
+
+.links {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-size: 0.85rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
+  text-decoration: none;
+  background: var(--accent);
+  color: white;
+}
+
+.muted-btn {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid rgba(14, 165, 164, 0.12);
+}
+
+.debug {
+  font-size: 0.9rem;
+  color: #374151;
+  margin-top: 1rem;
+}
+
+.warning {
+  color: #b45309;
+}
+
+@media (max-width:480px) {
+  body {
+    padding: 1rem;
+  }
 }

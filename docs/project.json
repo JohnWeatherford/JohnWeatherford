@@ -12,7 +12,8 @@
         "date": "Jan to May 2025",
         "description": "A group project creating Clue-Meister, a system designed for escape-room hosts. It helped track player progress and deliver clues. Most work involved diagramming and planning user interactions within the system.",
         "links": "#",
-        "project": "https://unaedu-my.sharepoint.com/:w:/r/personal/ktrousdale4_una_edu/_layouts/15/doc2.aspx?sourcedoc=%7BA93C9F4A-ACF3-46A8-931E-30D7CFC73B73%7D&file=Final%20Paper%20CIS-330.docx&action=default&mobileredirect=true&DefaultItemOpen=1"
+        "project": "https://unaedu-my.sharepoint.com/:w:/r/personal/ktrousdale4_una_edu/_layouts/15/doc2.aspx?sourcedoc=%7BA93C9F4A-ACF3-46A8-931E-30D7CFC73B73%7D&file=Final%20Paper%20CIS-330.docx&action=default&mobileredirect=true&DefaultItemOpen=1",
+        "image": "images/clue-meister.png"
     },
     {
         "title": "Project Bravo",
@@ -21,7 +22,7 @@
         "links": "#",
         "game": "https://johnweatherford.github.io/vigilant-doodle-bravo/",
         "project": "https://github.com/JohnWeatherford/vigilant-doodle-bravo",
-        "screenshot": "images/Screenshot.png"
+        "image": "images/Screenshot.png"
     },
     {
         "title": "Project Charlie",
