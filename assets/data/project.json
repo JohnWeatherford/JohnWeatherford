@@ -1,0 +1,25 @@
+[
+    {
+        "title": "Alpha Project",
+        "date": "September 17, 2025",
+        "description": "In the Alpha Project I built and deployed a clean, multi-paged static site using HTML and CSS. This project included navbars/footers, semantic markup, accessibility checks, and a full professional workflow (wireframes, README, attribution). The site contained an About/Dev Profile card, a blog section, projects, and resources. It used responsive CSS (Bootstrap 5 or Flex/Grid), Normalize.css, Google Fonts, an advanced selector, and basic JavaScript interactions.",
+        "links": "#",
+        "project": "https://github.com/JohnWeatherford/Alpha-Project"
+    },
+    {
+        "title": "Clue-Meister",
+        "date": "Jan to May 2025",
+        "description": "A group project creating Clue-Meister, a system designed for escape-room hosts. It helped track player progress and deliver clues. Most work involved diagramming and planning user interactions within the system.",
+        "links": "#",
+        "project": "https://unaedu-my.sharepoint.com/:w:/r/personal/ktrousdale4_una_edu/_layouts/15/doc2.aspx?sourcedoc=%7BA93C9F4A-ACF3-46A8-931E-30D7CFC73B73%7D&file=Final%20Paper%20CIS-330.docx&action=default&mobileredirect=true&DefaultItemOpen=1"
+    },
+    {
+        "title": "Project Bravo",
+        "date": "October 13, 2025",
+        "description": "A small game that tests your knowledge of common 'Hello World' code statements.",
+        "links": "#",
+        "game": "https://johnweatherford.github.io/vigilant-doodle-bravo/",
+        "project": "https://github.com/JohnWeatherford/vigilant-doodle-bravo",
+        "screenshot": "images/Screenshot.png"
+    }
+]
