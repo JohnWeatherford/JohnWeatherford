@@ -11,7 +11,7 @@ function onClick() {
 }
 
 // script to pull data from json file and create project cards
-fetch('https://znasser46.github.io/znasser46/projects.json').then(response => response.json())
+fetch('https://github.com/JohnWeatherford/JohnWeatherford/blob/main/docs/project.json').then(response => response.json())
   .then(data => {
 
     const projectCardSet = document.getElementById('projectCardSet');
@@ -61,7 +61,7 @@ fetch('https://znasser46.github.io/znasser46/projects.json').then(response => re
   .catch(error => console.error('Error fetching app ideas:', error));
 
 // script to pull data from json file and create achievement cards
-fetch('https://znasser46.github.io/znasser46/achievements.json').then(response => response.json())
+fetch('https://github.com/JohnWeatherford/JohnWeatherford/blob/main/docs/achievements.json').then(response => response.json())
   .then(data => {
 
     const achievementCardSet = document.getElementById('achievementCardSet');
