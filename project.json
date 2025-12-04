@@ -21,5 +21,21 @@
         "game": "https://johnweatherford.github.io/vigilant-doodle-bravo/",
         "project": "https://github.com/JohnWeatherford/vigilant-doodle-bravo",
         "screenshot": "images/Screenshot.png"
+    },
+    {
+        "title": "Project Charlie",
+        "date": "2025-10-26",
+        "description": "A small collection of games.",
+        "live": "https://znasser46.github.io/project-charlie/",
+        "code": "https://github.com/znasser46/project-charlie",
+        "image": "images/screenshot.png"
+    },
+    {
+        "title": "Project Delta",
+        "date": "2025-11-03",
+        "description": "A web form improvement project that enhances user experience by replacing a small textbox with a dynamic dropdown menu for selecting subjects. This change simplifies the selection process, especially for common two-letter classes, making it easier for users to find and choose their subjects.",
+        "links": "#",
+        "live": "https://johnweatherford.github.io/project-delta/",
+        "code": "#"
     }
 ]
